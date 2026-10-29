@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cogni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">✎</span>
+      <span class="brand-name">cogni</span>
+    </div>
+    <button id="profile-btn" class="icon-btn" title="Your language" aria-label="Your language">👤</button>
+  </header>
+
+  <main class="page">
+    <section class="card">
+      <textarea id="input-text" class="input-text" placeholder="Type a word, an idiom, or paste a full text…" rows="4"></textarea>
+
+      <div class="lang-row">
+        <div class="lang-field">
+          <label for="from-select">From</label>
+          <select id="from-select"></select>
+          <input id="from-custom" class="custom-lang" type="text" placeholder="Type a language…" hidden>
+        </div>
+        <button id="swap-btn" class="icon-btn swap-btn" title="Swap languages" aria-label="Swap languages">⇄</button>
+        <div class="lang-field">
+          <label for="to-select">To</label>
+          <select id="to-select"></select>
+          <input id="to-custom" class="custom-lang" type="text" placeholder="Type a language…" hidden>
+        </div>
+      </div>
+
+      <div class="mode-row">
+        <span class="mode-label">Mode</span>
+        <div class="mode-toggle" id="mode-toggle" role="radiogroup" aria-label="Mode">
+          <button type="button" class="mode-btn active" data-mode="auto" role="radio" aria-checked="true">Auto</button>
+          <button type="button" class="mode-btn" data-mode="expression" role="radio" aria-checked="false">Word &amp; Idiom</button>
+          <button type="button" class="mode-btn" data-mode="text" role="radio" aria-checked="false">Translate</button>
+        </div>
+      </div>
+
+      <button id="go-btn" class="go-btn">Explain / Translate</button>
+    </section>
+
+    <section id="result-card" class="card result-card" hidden>
+      <div class="result-meta">
+        <span id="language-badge" class="badge" hidden></span>
+        <span id="mode-used-badge" class="badge"></span>
+      </div>
+      <div id="correction-note" class="correction-note" hidden></div>
+      <div id="headline" class="headline" hidden></div>
+      <div id="result-body" class="result-body"></div>
+      <details id="details-panel" class="details-panel" hidden>
+        <summary>Grammar &amp; usage</summary>
+        <div id="details-body" class="result-body"></div>
+      </details>
+    </section>
+
+    <section id="error-card" class="card error-card" hidden>
+      <p id="error-text"></p>
+    </section>
+  </main>
+
+  <!-- Profile panel: your own base language, used to default the "To"
+       field so it doesn't need reselecting every time. Stored in the
+       browser only (localStorage) - no account/login, no backend
+       database, matches "keep it simple" for a personal tool. -->
+  <div id="profile-overlay" class="overlay" hidden>
+    <div class="profile-panel">
+      <h2>Your language</h2>
+      <p class="profile-hint">Explanations (for Word &amp; Idiom lookups) default to this language, so you don't have to pick it every time.</p>
+      <select id="profile-lang-select"></select>
+      <input id="profile-lang-custom" class="custom-lang" type="text" placeholder="Type a language…" hidden>
+      <div class="profile-actions">
+        <button id="profile-save-btn" class="go-btn">Save</button>
+        <button id="profile-close-btn" class="icon-btn">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Markdown rendering for results + sanitizing before inserting into
+       the page - loaded from a CDN to avoid a build step, acceptable for
+       a local personal tool (see README "Status" for what
+       changes before this is exposed publicly). -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="languages.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

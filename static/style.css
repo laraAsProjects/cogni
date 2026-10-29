@@ -1,0 +1,341 @@
+/* =========================================================================
+   THEME - everything below this block uses these variables, nothing else.
+   To try a different palette, only edit this block (e.g. swap the whole
+   thing for a saved alternative) - no other rule in this file needs to
+   change. Current: warm beige + pastel blue, per explicit request to be
+   able to "try it out and quickly change it again".
+   ========================================================================= */
+:root {
+  --color-bg: #f7f1e8;          /* warm beige page background */
+  --color-surface: #fffaf3;      /* card background, slightly lighter */
+  --color-border: #e8dcc8;       /* warm beige border/divider */
+  --color-text: #3a352c;         /* warm near-black body text */
+  --color-text-muted: #8a8172;   /* softer warm grey for hints/labels */
+
+  --color-accent: #a9c6dd;       /* pastel blue - primary interactive color */
+  --color-accent-dark: #6f93ac;  /* darker pastel blue - hover/active states */
+  --color-accent-soft: #e4edf3;  /* very light pastel blue - subtle fills */
+
+  --color-error: #c17b6b;        /* warm muted red-brown, stays in-palette */
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  /* One font for everything (headings, body, buttons, badges) per explicit
+     request - loaded from Google Fonts in index.html's <head>, same CDN
+     pattern already used for marked/DOMPurify (see README "Deployment"
+     TODO for what that means once this goes beyond local use). Familjen
+     Grotesk over Comfortaa (the other option raised): Comfortaa is nicer
+     for short display text but known to lose legibility in actual
+     paragraphs (very geometric, limited weight range) - not a good fit
+     once one font has to carry Meaning/Example body text too, not just
+     headings. */
+  --font: "Familjen Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* ========================================================================= */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+}
+
+.brand { display: flex; align-items: center; gap: 0.5rem; }
+.brand-mark {
+  font-size: 1.3rem;
+  color: var(--color-accent-dark);
+}
+.brand-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  box-shadow: 0 2px 10px rgba(58, 53, 44, 0.05);
+}
+
+.input-text {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.05rem;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  resize: vertical;
+  outline: none;
+  padding: 0.2rem 0;
+}
+.input-text::placeholder { color: var(--color-text-muted); }
+
+.lang-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.lang-field { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+.lang-field label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+select, .custom-lang {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.6rem;
+  width: 100%;
+  outline: none;
+}
+select:focus, .custom-lang:focus, .input-text:focus { border-color: var(--color-accent-dark); }
+.custom-lang { margin-top: 0.3rem; }
+
+.swap-btn { margin-bottom: 0.35rem; }
+
+.icon-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+.icon-btn:hover { background: var(--color-accent-soft); }
+
+.mode-row {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.mode-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mode-toggle {
+  display: flex;
+  background: var(--color-accent-soft);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.mode-btn.active {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.go-btn {
+  margin-top: 1.2rem;
+  width: 100%;
+  background: var(--color-accent-dark);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.go-btn:hover { background: var(--color-accent); }
+.go-btn:disabled { opacity: 0.6; cursor: default; }
+
+.result-card { animation: fade-in 0.2s ease; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.result-meta { margin-bottom: 0.6rem; display: flex; gap: 0.5rem; align-items: center; }
+/* Badges (aka "chips"/"pills") - larger and darker than before so they
+   hold their own against the headline/headings below instead of getting
+   visually lost next to them. Dark text on the light accent fill is also
+   just more legible than the old medium-blue-on-light-blue combo. */
+.badge {
+  display: inline-block;
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+/* Optional typo-correction note ("(interpreted as X)") - see
+   renderResult() in script.js. Small and muted, deliberately lower-key
+   than the headline right below it - it's a quick FYI, not something
+   that should compete for attention with the actual answer. */
+.correction-note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin: 0.2rem 0 0;
+}
+
+/* The optional "term → translation" headline - see renderResult() in
+   script.js, which pulls it out of the markdown specifically so it can
+   be styled distinctly (larger, darker) instead of blending in with
+   every other bold word in the answer body. */
+.headline {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0.3rem 0 0.9rem;
+}
+
+.result-body { line-height: 1.6; font-size: 0.98rem; }
+.result-body p { margin: 0.6em 0; }
+.result-body ul, .result-body ol { padding-left: 1.3em; }
+.result-body strong { color: var(--color-accent-dark); }
+.result-body hr { border: none; border-top: 1px solid var(--color-border); margin: 1em 0; }
+.result-body em { color: var(--color-text-muted); }
+.result-body a {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+}
+.result-body a:hover { color: var(--color-text); }
+/* Cross-reference links (see markupXrefs in script.js) re-run a lookup
+   rather than navigating anywhere - a dotted underline instead of solid
+   hints at that difference from a real (source-citation) link without
+   introducing a new color. */
+.result-body a.xref-link { text-decoration-style: dotted; }
+
+/* Meaning / Example / (inside Details) Grammar / Usage - all the same
+   size, weight, and color regardless of heading level, so they read as
+   one consistent family of subheadings rather than Meaning/Example
+   dominating the page via the browser's default (much larger, plain
+   black) h2 styling. */
+.result-body h2, .result-body h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  letter-spacing: 0.01em;
+  margin: 1.1em 0 0.35em;
+}
+.result-body h2:first-child, .result-body h3:first-child { margin-top: 0; }
+
+/* Grammar's verb-conjugation table - plain <table> has no visible grid
+   by default, which was the actual complaint (couldn't tell where one
+   column ended and the next began). Real borders on every cell fixes
+   that; header row gets the same treatment as everything else, filled
+   with the soft accent color instead of a third new color. */
+.result-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5em 0 0.8em;
+  font-size: 0.95rem;
+}
+.result-body th, .result-body td {
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.65rem;
+  text-align: left;
+}
+.result-body th {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  font-weight: 700;
+}
+
+.details-panel {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--color-border);
+}
+.details-panel summary {
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  list-style: none;
+}
+.details-panel summary::-webkit-details-marker { display: none; }
+.details-panel summary::before { content: "▸ "; }
+.details-panel[open] summary::before { content: "▾ "; }
+.details-panel .result-body { margin-top: 0.6rem; }
+
+.error-card { border-color: var(--color-error); color: var(--color-error); }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 53, 44, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+/* An author `display` rule on .overlay otherwise beats the browser's
+   default `[hidden] { display: none }` UA rule at equal specificity -
+   without this, the modal shows by default instead of being hidden. */
+.overlay[hidden] { display: none; }
+.profile-panel {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 360px;
+  width: 100%;
+}
+.profile-panel h2 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+.profile-hint { color: var(--color-text-muted); font-size: 0.85rem; margin: 0 0 1rem; }
+.profile-actions { display: flex; gap: 0.6rem; margin-top: 1rem; align-items: center; }
+.profile-actions .go-btn { margin-top: 0; }
+
+@media (max-width: 480px) {
+  .lang-row { flex-wrap: wrap; }
+  .swap-btn { order: 3; margin: 0 auto; }
+}

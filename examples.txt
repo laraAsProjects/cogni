@@ -1,0 +1,10 @@
+# One item per line, run with e.g.:
+#   python cli.py --from German --to English --batch examples.txt
+# Lines starting with # are ignored. Mix of short expressions (should
+# trigger "expression" mode) and longer passages (should trigger "text"
+# mode) to sanity-check auto-detection and quality together.
+
+einleuchtend
+auf dem Holzweg sein
+Ich habe leider keine Zeit.
+Der Termin wurde kurzfristig verschoben, weil der Kunde noch offene Fragen zum Vertrag hatte.

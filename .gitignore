@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+cache.json
+.pytest_cache/
+
+# Local-only notes and backups (detailed roadmap, dev notes, history bundle)
+private/
